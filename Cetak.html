@@ -48,7 +48,7 @@ async function cetakToken() {
   try {
     Pi.createPayment({
       amount: 0.01,
-      memo: 'CREATE_EPIG:200000000000',
+      memo: 'CREATE_EPIG:200M',
       metadata: {token: "EPIG"}
     }, {
       onReadyForServerCompletion: (paymentId) => {
