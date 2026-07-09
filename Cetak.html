@@ -30,7 +30,7 @@ async function loginPi() {
   wallet = auth.user.wallet_address;
   document.getElementById("wallet").innerText = "Wallet: " + wallet;
   document.getElementById("btnCetak").disabled = false;
-  document.getElementById("status").innerText = "✅ Login berhasil";
+  document.getElementById("status").innerText = '✅ Login berhasil';
 }
 async function cetakToken() {
   Pi.createPayment({
@@ -39,11 +39,9 @@ async function cetakToken() {
     metadata: {token: "EPIG"}
   }, {
     onReadyForServerCompletion: (paymentId, txId) => {
-      document.getElementById("status").innerText = "🎉 SELAMAT! EPIG BERHASIL DICETAK!";
-    },
+      document.getElementById("status").innerText = '🎉 SELAMAT! EPIG BERHASIL DICETAK!';
     onError: (error) => { 
-      document.getElementById("status").innerText = "❌ Error: " + error; 
-    }
+      document.getElementById("status").innerText = '❌ Error: ' + error;
   });
 }
 </script>
