@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cetak EPIG TOKEN</title>
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <style>
+    body{font-family:Arial;text-align:center;padding:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+    .box{background:white;padding:25px;border-radius:15px;max-width:400px;margin:50px auto;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+    h2{color:#6f1d6b}
+    button{background:#6f1d6b;color:white;border:none;padding:14px 24px;border-radius:10px;font-size:16px;cursor:pointer;width:100%;margin-top:12px;font-weight:bold}
+    button:disabled{background:#ccc}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>🔥 CETAK EPIG TOKEN 🔥</h2>
+    <p>Supply: 200.000.000.000 EPIG</p>
+    <button onclick="loginPi()">1. LOGIN DENGAN PI WALLET</button>
+    <p id="wallet">Wallet: Belum login</p>
+    <button id="btnCetak" onclick="cetakToken()" disabled>2. CETAK TOKEN EPIG</button>
+    <p id="status"></p>
+  </div>
+<script>
+let wallet = "";
+Pi.init({ version: "2.0", sandbox: true });
+async function loginPi() {
+  const auth = await Pi.authenticate(['username', 'payments', 'wallet_address']);
+  wallet = auth.user.wallet_address;
+  document.getElementById("wallet").innerText = "Wallet: " + wallet;
+  document.getElementById("btnCetak").disabled = false;
+  document.getElementById("status").innerText = "✅ Login berhasil";
+}
+async function cetakToken() {
+  Pi.createPayment({
+    amount: 0.01,
+    memo: `CREATE_EPIG:200000000000`,
+    metadata: {token: "EPIG"}
+  }, {
+    onReadyForServerCompletion: (paymentId, txId) => {
+      document.getElementById("status").innerText = "🎉 SELAMAT! EPIG BERHASIL DICETAK!";
+    },
+    onError: (error) => { 
+      document.getElementById("status").innerText = "❌ Error: " + error; 
+    }
+  });
+}
+</script>
+</body>
+                              </html>
